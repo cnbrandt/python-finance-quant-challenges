@@ -1,2 +1,12 @@
-# Finance-Road-Map
-Finance Learning Road Map
+# 🎯 Python for Finance: My Quant Learning Journey
+
+## 🌐 Live Demo
+**[👉 View My Learning Dashboard](https://yourusername.github.io/python-finance-quant-challenges/)**
+
+**[👉 Interactive Challenge Roadmap](https://yourusername.github.io/python-finance-quant-challenges/roadmap.html)**
+
+## What You'll Find Here
+- 12 progressive challenges from basic data analysis to advanced quant modeling
+- Real Python solutions with detailed documentation
+- Interactive progress tracking
+- Professional portfolio showcase
