@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for Finance: Quant Challenge Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 4px;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 20px;
+            border-radius: 16px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .challenge-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .challenge-card.completed {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .challenge-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .challenge-level {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .challenge-level.intermediate {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+        }
+        
+        .challenge-level.advanced {
+            background: linear-gradient(135deg, #834d9b, #d04ed6);
+        }
+        
+        .challenge-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .challenge-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-tag {
+            background: #f0f2f5;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+        
+        .challenge-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .time-estimate {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .challenge-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .challenge-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .challenge-button.completed {
+            background: #4CAF50;
+        }
+        
+        .resources {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            color: white;
+        }
+        
+        .resources h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .resource-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .resource-link {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .modal h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .detailed-requirements {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .detailed-requirements h4 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .detailed-requirements ul {
+            margin-left: 20px;
+        }
+        
+        .detailed-requirements li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Python for Finance: Quant Challenge Roadmap</h1>
+            <p class="subtitle">From Finance Professional to Risk Quant & Portfolio Manager</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Progress: 0/12 challenges completed</p>
+        </div>
+        
+        <div class="challenge-grid" id="challengeGrid">
+            <!-- Challenges will be populated by JavaScript -->
+        </div>
+        
+        <div class="resources">
+            <h3>📚 Essential Resources</h3>
+            <div class="resource-links">
+                <div class="resource-link">
+                    <strong>📊 pandas</strong><br>
+                    Data manipulation & analysis
+                </div>
+                <div class="resource-link">
+                    <strong>📈 yfinance</strong><br>
+                    Financial data retrieval
+                </div>
+                <div class="resource-link">
+                    <strong>🔢 numpy</strong><br>
+                    Numerical computing
+                </div>
+                <div class="resource-link">
+                    <strong>📉 matplotlib/seaborn</strong><br>
+                    Data visualization
+                </div>
+                <div class="resource-link">
+                    <strong>🎯 scipy</strong><br>
+                    Statistical analysis
+                </div>
+                <div class="resource-link">
+                    <strong>⚡ quantlib</strong><br>
+                    Advanced quant finance
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for detailed challenge view -->
+    <div id="challengeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        const challenges = [
+            {
+                id: 1,
+                level: "Beginner",
+                title: "Stock Data Explorer",
+                description: "Build a tool to fetch, clean, and visualize stock price data. Learn the foundations of financial data handling.",
+                skills: ["pandas", "yfinance", "matplotlib", "data cleaning"],
+                timeEstimate: "4-6 hours",
+                requirements: [
+                    "Fetch historical data for 5 major stocks (AAPL, GOOGL, MSFT, AMZN, TSLA)",
+                    "Calculate basic statistics (mean, std, min, max returns)",
+                    "Create price and volume charts with proper formatting",
+                    "Handle missing data and weekends appropriately",
+                    "Export cleaned data to CSV for further analysis"
+                ],
+                deliverables: [
+                    "Python script with modular functions",
+                    "Clean dataset saved as CSV",
+                    "3-4 professional visualizations",
+                    "Brief summary report of findings"
+                ]
+            },
+            {
+                id: 2,
+                level: "Beginner",
+                title: "Portfolio Return Calculator",
+                description: "Calculate portfolio returns, weights, and basic performance metrics for a multi-asset portfolio.",
+                skills: ["numpy", "pandas", "portfolio theory", "returns calculation"],
+                timeEstimate: "5-7 hours",
+                requirements: [
+                    "Create a portfolio with 6-8 assets with custom weights",
+                    "Calculate daily, monthly, and annual returns",
+                    "Implement portfolio rebalancing logic",
+                    "Calculate cumulative returns and drawdowns",
+                    "Compare portfolio performance to S&P 500 benchmark"
+                ],
+                deliverables: [
+                    "Portfolio class with rebalancing methods",
+                    "Performance comparison dashboard",
+                    "Risk-return scatter plot",
+                    "Portfolio composition pie chart"
+                ]
+            },
+            {
+                id: 3,
+                level: "Beginner",
+                title: "Financial Ratios Dashboard",
+                description: "Extract and analyze key financial ratios from company financial statements.",
+                skills: ["financial analysis", "data visualization", "ratio analysis"],
+                timeEstimate: "6-8 hours",
+                requirements: [
+                    "Pull financial data for 10 companies in same sector",
+                    "Calculate P/E, ROE, Debt-to-Equity, Current Ratio, etc.",
+                    "Create comparative analysis across companies",
+                    "Build interactive dashboard with filters",
+                    "Identify over/undervalued companies based on ratios"
+                ],
+                deliverables: [
+                    "Interactive HTML dashboard",
+                    "Financial ratios comparison table",
+                    "Sector analysis summary",
+                    "Investment recommendations report"
+                ]
+            },
+            {
+                id: 4,
+                level: "Intermediate",
+                title: "Risk Metrics Engine",
+                description: "Build a comprehensive risk measurement system calculating VaR, CVaR, and other risk metrics.",
+                skills: ["VaR", "monte carlo", "risk management", "statistical modeling"],
+                timeEstimate: "8-12 hours",
+                requirements: [
+                    "Implement Historical VaR, Parametric VaR, and Monte Carlo VaR",
+                    "Calculate Conditional VaR (Expected Shortfall)",
+                    "Build correlation matrix and portfolio risk decomposition",
+                    "Create stress testing scenarios",
+                    "Generate daily risk reports with visualizations"
+                ],
+                deliverables: [
+                    "Risk calculation engine with multiple methodologies",
+                    "Daily risk report template",
+                    "Stress testing framework",
+                    "Risk limit monitoring system"
+                ]
+            },
+            {
+                id: 5,
+                level: "Intermediate",
+                title: "Options Pricing & Greeks Calculator",
+                description: "Implement Black-Scholes model and calculate option Greeks for risk management.",
+                skills: ["options pricing", "black-scholes", "greeks", "derivatives"],
+                timeEstimate: "10-14 hours",
+                requirements: [
+                    "Implement Black-Scholes formula for calls and puts",
+                    "Calculate all Greeks (Delta, Gamma, Theta, Vega, Rho)",
+                    "Build option portfolio risk analysis tool",
+                    "Create Greeks visualization dashboard",
+                    "Implement binomial tree pricing as validation"
+                ],
+                deliverables: [
+                    "Options pricing library with validation",
+                    "Greeks calculator with sensitivity analysis",
+                    "Option strategy analyzer",
+                    "Interactive pricing visualization tool"
+                ]
+            },
+            {
+                id: 6,
+                level: "Intermediate",
+                title: "Backtesting Framework",
+                description: "Create a robust backtesting system to evaluate trading strategies with proper risk controls.",
+                skills: ["backtesting", "strategy development", "performance attribution"],
+                timeEstimate: "12-16 hours",
+                requirements: [
+                    "Build modular backtesting engine with transaction costs",
+                    "Implement 3 different trading strategies (momentum, mean reversion, pairs trading)",
+                    "Calculate Sharpe ratio, Sortino ratio, Maximum Drawdown",
+                    "Add position sizing and risk management rules",
+                    "Create performance attribution analysis"
+                ],
+                deliverables: [
+                    "Backtesting framework with multiple strategies",
+                    "Performance analytics dashboard",
+                    "Strategy comparison report",
+                    "Risk-adjusted returns analysis"
+                ]
+            },
+            {
+                id: 7,
+                level: "Intermediate",
+                title: "Credit Risk Scorecard",
+                description: "Build a credit scoring model using logistic regression and evaluate model performance.",
+                skills: ["credit risk", "logistic regression", "model validation", "scorecard development"],
+                timeEstimate: "14-18 hours",
+                requirements: [
+                    "Clean and prepare credit dataset with feature engineering",
+                    "Build logistic regression model for default prediction",
+                    "Create credit scorecard with points allocation",
+                    "Validate model using IV, PSI, and ROC curves",
+                    "Implement model monitoring framework"
+                ],
+                deliverables: [
+                    "Credit scoring model with documentation",
+                    "Model validation report with statistics",
+                    "Scorecard implementation tool",
+                    "Model monitoring dashboard"
+                ]
+            },
+            {
+                id: 8,
+                level: "Advanced",
+                title: "Portfolio Optimization Engine",
+                description: "Implement modern portfolio theory with advanced optimization techniques and constraints.",
+                skills: ["portfolio optimization", "efficient frontier", "scipy.optimize", "constraint programming"],
+                timeEstimate: "16-22 hours",
+                requirements: [
+                    "Implement Markowitz mean-variance optimization",
+                    "Add realistic constraints (sector limits, turnover, ESG scores)",
+                    "Build efficient frontier with multiple objectives",
+                    "Implement Black-Litterman model for return forecasting",
+                    "Create portfolio rebalancing with transaction cost optimization"
+                ],
+                deliverables: [
+                    "Portfolio optimization engine with constraints",
+                    "Efficient frontier visualization tool",
+                    "Black-Litterman implementation",
+                    "Automated rebalancing system"
+                ]
+            },
+            {
+                id: 9,
+                level: "Advanced",
+                title: "GARCH Volatility Modeling",
+                description: "Model and forecast volatility using GARCH models for risk management applications.",
+                skills: ["GARCH", "volatility modeling", "time series", "forecasting"],
+                timeEstimate: "18-24 hours",
+                requirements: [
+                    "Implement GARCH(1,1) and EGARCH models from scratch",
+                    "Estimate model parameters using maximum likelihood",
+                    "Forecast volatility with confidence intervals",
+                    "Compare models using information criteria",
+                    "Apply to portfolio risk forecasting"
+                ],
+                deliverables: [
+                    "GARCH modeling library with multiple specifications",
+                    "Volatility forecasting tool",
+                    "Model comparison framework",
+                    "Risk forecasting application"
+                ]
+            },
+            {
+                id: 10,
+                level: "Advanced",
+                title: "Factor Model & Risk Attribution",
+                description: "Build multi-factor models for return attribution and risk decomposition.",
+                skills: ["factor models", "PCA", "risk attribution", "factor analysis"],
+                timeEstimate: "20-26 hours",
+                requirements: [
+                    "Implement Fama-French 3-factor and 5-factor models",
+                    "Build custom factor models using PCA",
+                    "Perform return attribution analysis",
+                    "Create risk budgeting framework",
+                    "Build factor exposure monitoring system"
+                ],
+                deliverables: [
+                    "Multi-factor modeling framework",
+                    "Return attribution engine",
+                    "Risk budgeting tool",
+                    "Factor exposure dashboard"
+                ]
+            },
+            {
+                id: 11,
+                level: "Advanced",
+                title: "Algorithmic Trading System",
+                description: "Build an end-to-end algorithmic trading system with real-time data processing.",
+                skills: ["algorithmic trading", "real-time data", "order management", "execution algorithms"],
+                timeEstimate: "25-35 hours",
+                requirements: [
+                    "Build real-time data ingestion and processing pipeline",
+                    "Implement TWAP and VWAP execution algorithms",
+                    "Create order management system with risk checks",
+                    "Add market impact and transaction cost models",
+                    "Build performance monitoring and alerting system"
+                ],
+                deliverables: [
+                    "Complete algorithmic trading framework",
+                    "Execution algorithm library",
+                    "Risk management and monitoring system",
+                    "Performance analytics dashboard"
+                ]
+            },
+            {
+                id: 12,
+                level: "Advanced",
+                title: "Integrated Risk Management Platform",
+                description: "Capstone project: Build a comprehensive risk management platform combining all previous learnings.",
+                skills: ["system integration", "risk management", "portfolio management", "full-stack development"],
+                timeEstimate: "30-40 hours",
+                requirements: [
+                    "Integrate portfolio optimization, risk measurement, and backtesting",
+                    "Build web-based dashboard with real-time updates",
+                    "Implement automated reporting and alerting",
+                    "Add stress testing and scenario analysis",
+                    "Create client-facing investment reports"
+                ],
+                deliverables: [
+                    "Full-featured risk management platform",
+                    "Web-based user interface",
+                    "Automated reporting system",
+                    "Documentation and user manual"
+                ]
+            }
+        ];
+        
+        let completedChallenges = [];
+        
+        function renderChallenges() {
+            const grid = document.getElementById('challengeGrid');
+            grid.innerHTML = '';
+            
+            challenges.forEach(challenge => {
+                const isCompleted = completedChallenges.includes(challenge.id);
+                const card = document.createElement('div');
+                card.className = `challenge-card ${isCompleted ? 'completed' : ''}`;
+                card.onclick = () => openModal(challenge);
+                
+                card.innerHTML = `
+                    <div class="challenge-header">
+                        <div>
+                            <div class="challenge-level ${challenge.level.toLowerCase()}">${challenge.level}</div>
+                            <div class="challenge-title">${challenge.title}</div>
+                        </div>
+                    </div>
+                    <div class="challenge-description">${challenge.description}</div>
+                    <div class="skills-list">
+                        ${challenge.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                    <div class="challenge-footer">
+                        <div class="time-estimate">⏱️ ${challenge.timeEstimate}</div>
+                        <button class="challenge-button ${isCompleted ? 'completed' : ''}" onclick="event.stopPropagation(); toggleComplete(${challenge.id}); return false;">
+                            ${isCompleted ? '✅ Completed' : 'Start Challenge'}
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            updateProgress();
+        }
+        
+        function openModal(challenge) {
+            const modal = document.getElementById('challengeModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <h2>${challenge.title}</h2>
+                <div class="challenge-level ${challenge.level.toLowerCase()}">${challenge.level}</div>
+                <p style="margin: 15px 0; font-size: 1.1em;">${challenge.description}</p>
+                
+                <div class="detailed-requirements">
+                    <h4>📋 Requirements:</h4>
+                    <ul>
+                        ${challenge.requirements.map(req => `<li>${req}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="detailed-requirements">
+                    <h4>🎯 Deliverables:</h4>
+                    <ul>
+                        ${challenge.deliverables.map(del => `<li>${del}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <strong>Skills you'll develop:</strong> ${challenge.skills.join(', ')}
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <strong>Estimated time:</strong> ${challenge.timeEstimate}
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+        
+        function toggleComplete(challengeId) {
+            if (completedChallenges.includes(challengeId)) {
+                completedChallenges = completedChallenges.filter(id => id !== challengeId);
+            } else {
+                completedChallenges.push(challengeId);
+            }
+            
+            renderChallenges();
+        }
+        
+        function updateProgress() {
+            const progress = (completedChallenges.length / challenges.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Progress: ${completedChallenges.length}/${challenges.length} challenges completed`;
+        }
+        
+        // Modal controls
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('challengeModal').style.display = 'none';
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('challengeModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Initialize
+        renderChallenges();
+    </script>
+</body>
+</html>
